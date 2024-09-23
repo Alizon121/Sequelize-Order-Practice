@@ -18,7 +18,7 @@ app.use(express.json());
 app.get('/bands/latest', async (req, res, next) => {
     const bands = await Band.findAll({ 
         // Your code here
-         
+         order: [['createdAt', 'DESC']]
     });
     res.json(bands);
 })
