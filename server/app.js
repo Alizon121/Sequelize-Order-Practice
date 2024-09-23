@@ -27,7 +27,11 @@ app.get('/bands/latest', async (req, res, next) => {
 // Get all musicians, ordered by last name, then first name, alphabetically
 app.get('/musicians/alphabetic', async (req, res, next) => {
     const musicians = await Musician.findAll({ 
-        // Your code here 
+        // Your code here
+        order: [
+            ['lastName', 'ASC'],
+            ['firstName', 'ASC']
+    ]
     });
     res.json(musicians);
 })
@@ -38,7 +42,9 @@ app.get('/musicians/alphabetic', async (req, res, next) => {
 app.get('/bands/alphabetic-musicians', async (req, res, next) => {
     const bands = await Band.findAll({ 
         include: { model: Musician }, 
-        // Your code here 
+        // Your code here
+        order
+
     })
     res.json(bands);
 })
